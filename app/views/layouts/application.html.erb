@@ -8,8 +8,27 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
+
+    <div class="booyah-box col-10 ">
+      <%= link_to 'Books', root_path, class: 'navbar-brand' %>
+    </div>
+
+    <br/>
+
+    <div class="booyah-box col-10 ">
+      <%= form_tag(books_path, method: "get") do %>
+        <%= label_tag(:keyword, "Search for:") %>
+        <%= text_field_tag(:keyword) %>
+        <%= submit_tag("Search") %>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= link_to 'Add Book', new_book_path, class: 'nav-link' %>
+    </div>
+
     <%= yield %>
   </body>
 </html>
