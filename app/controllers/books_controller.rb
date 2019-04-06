@@ -9,12 +9,13 @@ class BooksController < ApplicationController
   end
   
   def create
-    Book.create(book_params)
+    @book = Book.create(book_params)
     redirect_to root_path
   end
 
   def show
     @book = Book.find(params[:id])
+    @author = Author.new
   end
 
   def edit

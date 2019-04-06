@@ -1,8 +1,15 @@
 class Book < ApplicationRecord
 
+  has_many :authorships
+  has_many :authors, through: :authorships
+
+  def author_info
+    self.authors
+  end
+
   def self.search(keyword)
     if keyword.present?
-      Book.where("title ILIKE ? OR author ILIKE ? OR genre ILIKE ? OR classification ILIKE ? OR book_type ILIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%") 
+      Book.where("title ILIKE ? OR genre ILIKE ? OR classification ILIKE ? OR book_type ILIKE ?", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%") 
     else
       Book.all
     end
@@ -40,5 +47,21 @@ class Book < ApplicationRecord
       'Nonfiction'
     ]
   end  
+
+  def author_names
+    names = ''
+    if authors.length > 0
+      names = 'by '
+    end
+    count = 0
+    authors.each do |author|
+      count += 1
+      names += author.full_name
+      if authors.length != count 
+        names += ', '
+      end
+    end
+    names
+  end
 
 end

@@ -3,8 +3,27 @@
 <%= link_to 'Destroy', book_path(@book), method: :delete, data: {confirm: 'Are you sure you want to delete this book?'} %>
 <%= ' this book' %>
 <h1><%= @book.title %></h1>
-<h1><%= @book.author %></h1>
 <h1><%= @book.genre %></h1>
 <h1><%= @book.classification %></h1>
 <h1><%= @book.book_type %></h1>
 <h1><%= @book.year %></h1>
+<br /><br />
+<h3>Author(s) who wrote this book</h3>
+<br />
+
+<% @book.authors.each do |author| %>
+  <div>
+    <%= author.first_name %>
+    <br />
+    <%= author.last_name %>
+    <br />
+    <%= author.age %>
+    <br />
+    <td><%= link_to 'Delete Author', author_path(author), method: :delete, data: {confirm: 'Are you sure you want to delete this author?'} %></td>
+    <br />
+    <%= link_to 'Edit Author', edit_author_path(author) %>
+    <br />
+    <%= link_to 'Author Details', author_path(author) %>
+    <br/>
+  </div>
+<% end %>

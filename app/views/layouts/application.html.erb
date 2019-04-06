@@ -15,19 +15,31 @@
       <%= link_to 'Books', root_path, class: 'navbar-brand' %>
     </div>
 
+    <div class="booyah-box col-10 ">
+      <%= link_to 'Authors', authors_path, class: 'navbar-brand' %>
+    </div>
+
+    <div class="booyah-box col-10 ">
+      <%= link_to 'Add Book', new_book_path, class: 'navbar-brand' %>
+    </div>
+
+    <div class="booyah-box col-10 ">
+      <%= link_to 'Add Author', new_author_path, class: 'navbar-brand' %>
+    </div>
+
     <br/>
 
     <div class="booyah-box col-10 ">
       <%= form_tag(books_path, method: "get") do %>
-        <%= label_tag(:keyword, "Search for:") %>
-        <%= text_field_tag(:keyword) %>
+        <div>  
+          <%= label_tag(:keyword, "Search for a book:") %>
+        </div> 
+        <%= text_field_tag(:keyword, nil, placeholder: 'Book Info') %>
         <%= submit_tag("Search") %>
       <% end %>
     </div>
-  
-    <div>
-      <%= link_to 'Add Book', new_book_path, class: 'nav-link' %>
-    </div>
+
+    <br/><br/>
 
     <%= yield %>
   </body>
